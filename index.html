@@ -3,147 +3,404 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deepak Wadhwa - Learning Community</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<title>MEHTA IS BACK | Stock Market Updates on Telegram</title>
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0B0E11;
+    --panel: #12161C;
+    --line: #232933;
+    --ink: #E7EAEE;
+    --ink-dim: #8B95A3;
+    --bull: #17C695;
+    --bear: #F0465A;
+    --gold: #E8B33D;
   }
 
-  .card {
-    width: 85%;
-    max-width: 340px; 
-    background: #010a0f;
-    border: 1.5px solid #00d2ff;
-    border-radius: 35px;
-    padding: 20px 15px;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    overflow-x:hidden;
   }
 
-  .profile-img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 3px solid #00d2ff;
-    object-fit: cover;
-    margin-top: -5px;
-    box-shadow: 0 0 15px #00d2ff;
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; }
   }
 
-  h1 {
-    color: #fff;
-    font-size: 20px;
-    margin: 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  /* ---------- TICKER ---------- */
+  .ticker-wrap{
+    background:#000;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+  }
+  .ticker{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.3px;
+    animation: scroll-left 34s linear infinite;
+  }
+  .ticker span{ margin-right:38px; }
+  .up{ color:var(--bull); }
+  .down{ color:var(--bear); }
+  @keyframes scroll-left{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
   }
 
-  .features {
-    text-align: left;
-    margin: 0 auto;
-    width: 90%;
+  /* ---------- HEADER ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 6%;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand img{
+    width:42px; height:42px; border-radius:9px;
+    object-fit:cover;
+    border:1px solid var(--line);
+  }
+  .brand-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.5px;
+  }
+  .brand-name span{ color:var(--bull); }
+
+  .header-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+    display:none;
+  }
+  @media(min-width:640px){ .header-cta{ display:block; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 6% 70px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:50px;
+    align-items:center;
+    border-bottom:1px solid var(--line);
+  }
+  @media(max-width:900px){ .hero{ grid-template-columns:1fr; padding:60px 6% 50px; } }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--bull);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--bull);
+    box-shadow:0 0 0 0 rgba(23,198,149,0.6);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(23,198,149,0.5); }
+    70%{ box-shadow:0 0 0 8px rgba(23,198,149,0); }
+    100%{ box-shadow:0 0 0 0 rgba(23,198,149,0); }
   }
 
-  .feature-item {
-    color: #ccc;
-    font-size: 13px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.06;
+    letter-spacing:-0.5px;
+  }
+  h1 .accent{ color:var(--bull); }
+
+  .sub{
+    margin-top:22px;
+    font-size:16.5px;
+    line-height:1.65;
+    color:var(--ink-dim);
+    max-width:52ch;
   }
 
-  .feature-item:last-child { border-bottom: none; }
-
-  .icon { margin-right: 12px; font-size: 16px; }
-
-  .join-text {
-    color: #eee;
-    font-size: 12px;
-    margin: 20px 0 12px;
-    font-weight: 300;
+  .cta-row{
+    margin-top:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
   }
 
-  .telegram-btn {
-    display: block;
-    background: linear-gradient(90deg, #00d2ff 0%, #9247ff 100%);
-    color: white;
-    text-decoration: none;
-    padding: 14px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0, 210, 255, 0.3);
+  .btn-primary{
+    background:var(--bull);
+    color:#062019;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    padding:15px 26px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(23,198,149,0.25); }
+  .btn-primary svg{ width:18px; height:18px; }
+
+  .members{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-dim);
   }
 
-  .hindi-quote {
-    color: #bbb;
-    font-size: 13px;
-    margin-bottom: 20px;
-    line-height: 1.4;
+  /* candle chart */
+  .chart-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px 20px 16px;
+  }
+  .chart-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:16px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .chart-head .sym{ font-weight:600; font-size:14px; color:var(--ink); }
+  .chart-head .px{ color:var(--bull); font-size:15px; }
+  .chart{
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    height:180px;
+  }
+  .candle{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; }
+  .wick{ width:1.5px; background:currentColor; opacity:0.6; }
+  .body-bar{ width:100%; border-radius:2px; }
+  .g{ color:var(--bull); }
+  .r{ color:var(--bear); }
+  .g .body-bar{ background:var(--bull); }
+  .r .body-bar{ background:var(--bear); }
+
+  /* ---------- FEATURES ---------- */
+  .section{ padding:70px 6%; border-bottom:1px solid var(--line); }
+  .section-head{ margin-bottom:40px; max-width:60ch; }
+  .section-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--gold);
+    letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  .section h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(24px,3vw,32px);
+    font-weight:700;
+    line-height:1.2;
   }
 
-  .footer-box {
-    border: 1px solid rgba(0, 210, 255, 0.2);
-    border-radius: 12px;
-    padding: 8px;
-    font-size: 11px;
-    color: #888;
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .card{
+    background:var(--panel);
+    padding:26px 22px;
+  }
+  .card .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--bull);
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .card h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    margin-bottom:9px;
+  }
+  .card p{
+    color:var(--ink-dim);
+    font-size:14.5px;
+    line-height:1.6;
   }
 
-  /* Link styling for Agency */
-  .footer-box a { 
-    color: #00d2ff; 
-    font-weight: bold; 
-    text-decoration: none;
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    padding:70px 6%;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .cta-band h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(26px,4vw,38px);
+    max-width:20ch;
+    margin:0 auto 18px;
+  }
+  .cta-band p{
+    color:var(--ink-dim);
+    max-width:50ch;
+    margin:0 auto 30px;
+    font-size:15.5px;
   }
 
-  .disclaimer {
-    font-size: 9px;
-    color: #444;
-    margin-top: 12px;
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:36px 6% 44px;
+  }
+  .disclaimer{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    line-height:1.7;
+    color:var(--ink-dim);
+    max-width:80ch;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+  }
+  .disclaimer b{ color:var(--ink); }
+  .foot-brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13px;
+    color:var(--ink-dim);
+    margin-bottom:18px;
   }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <img src="https://i.ibb.co/FkV61CBG/711752123-122102238423341553-4586529772719677765-n.jpg" alt="Munaaf" class="profile-img">
-
-  <h1>Munaaf</h1>
-
-  <div class="features">
-    <div class="feature-item"><span class="icon"></span> Learning & Educational Sessions</div>
-    <div class="feature-item"><span class="icon"></span> Market Concepts & Awareness</div>
-    <div class="feature-item"><span class="icon"></span> Chart Reading Concepts</div>
-    <div class="feature-item"><span class="icon"></span> Educational Case Discussions</div>
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker"></div>
   </div>
 
-  <p class="join-text">Join our learning community and grow your knowledge</p>
+  <header>
+    <div class="brand">
+      <img src="https://i.ibb.co/KzjbHYQp/q-YC3n-Vs-Ida3-NFYIk0s-MOK2q6ir-U7-ZW8-Uo-Ia1-L-f-Spzs-Wiq-Ygixw-X-X6nvbt7b-UQO6-RUg-IT98-OV-he4-Kn9zx-Cvi.jpg" alt="Mehta Is Back logo">
+      <div class="brand-name">MEHTA IS <span>BACK</span></div>
+    </div>
+    <div class="header-cta">DAILY MARKET UPDATES · TELEGRAM</div>
+  </header>
 
-  <a href="https://t.me/+VQKcLntbMYhjOGJl" class="telegram-btn">JOIN TELEGRAM</a>
+  <section class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> LIVE ON TELEGRAM</div>
+      <h1>Track the market with<br><span class="accent">Mehta Is Back.</span></h1>
+      <p class="sub">
+        Daily market commentary, index &amp; stock-specific updates, and educational
+        breakdowns of price action — straight to your Telegram, free to join.
+      </p>
+      <div class="cta-row">
+        <a class="btn-primary" href="https://t.me/+zH0tehRDa5wxODdl" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 3.4 2.6 11c-1 .4-1 1 .2 1.4l5 1.6 2 6.2c.2.6.5.7 1 .4l2.7-2 5.2 3.8c.9.6 1.5.3 1.8-.8L23.9 4.6c.3-1.3-.4-1.9-1.9-1.2Z"/></svg>
+          Join the Telegram Channel
+        </a>
+        <div class="members">100% free · No paid tips · Cancel anytime</div>
+      </div>
+    </div>
 
-  <p class="hindi-quote">     ,     </p>
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="sym">NIFTY 50</span>
+        <span class="px">▲ Market Watch</span>
+      </div>
+      <div class="chart" id="chart"></div>
+    </div>
+  </section>
 
-  <div class="footer-box">
-    This Channel Advertise By <a href="https://t.me/+3XoqJNLxYHswNTc1" target="_blank">AD BUILD AGENCY</a>
-  </div>
+  <section class="section">
+    <div class="section-head">
+      <div class="section-tag">What you get</div>
+      <h2>One channel. The market, explained daily.</h2>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Daily market wrap</h3>
+        <p>A plain-language read on how Indian markets moved and why, posted every trading day.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Stock &amp; index notes</h3>
+        <p>Chart-based observations on key stocks and indices for your own research — not buy/sell calls.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Learning breakdowns</h3>
+        <p>Simple explainers on chart patterns, market terms, and how to read price action.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>No spam, no upsells</h3>
+        <p>Just market content. No "guaranteed returns," no paid tip packages.</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="disclaimer">
-    Terms | Privacy | Disclaimer <br>
-    This site is not part of Facebook� or endorsed by Facebook�.
-  </div>
-</div>
+  <section class="cta-band">
+    <h2>Start your day with the market, not without it.</h2>
+    <p>Join a free, no-noise Telegram channel built for people who actually want to understand the market.</p>
+    <a class="btn-primary" href="https://t.me/+zH0tehRDa5wxODdl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 3.4 2.6 11c-1 .4-1 1 .2 1.4l5 1.6 2 6.2c.2.6.5.7 1 .4l2.7-2 5.2 3.8c.9.6 1.5.3 1.8-.8L23.9 4.6c.3-1.3-.4-1.9-1.9-1.2Z"/></svg>
+      Join Free on Telegram
+    </a>
+  </section>
+
+  <footer>
+    <div class="foot-brand">MEHTA IS BACK — Stock Market Updates</div>
+    <div class="disclaimer">
+      <b>Disclaimer:</b> Content shared on this channel is for general information and educational
+      purposes only. It does not constitute investment advice, a recommendation, or an offer to buy
+      or sell any security. Stock market investments are subject to market risk. Please do your own
+      research or consult a SEBI-registered investment advisor before making any investment decision.
+      We do not guarantee any returns.
+    </div>
+  </footer>
+
+<script>
+  // Ticker content
+  const symbols = [
+    ["NIFTY 50","up"],["SENSEX","up"],["BANKNIFTY","down"],["RELIANCE","up"],
+    ["TCS","down"],["HDFCBANK","up"],["INFY","up"],["ICICIBANK","down"],
+    ["SBIN","up"],["ADANIENT","down"],["TATAMOTORS","up"],["BAJFINANCE","up"]
+  ];
+  const arrow = t => t === "up" ? "▲" : "▼";
+  let html = "";
+  for(let i=0;i<2;i++){
+    symbols.forEach(([name,dir])=>{
+      html += `<span class="${dir}">${name} ${arrow(dir)}</span>`;
+    });
+  }
+  document.getElementById('ticker').innerHTML = html;
+
+  // Candles
+  const chart = document.getElementById('chart');
+  const heights = [40,65,50,80,55,90,70,100,60,85,75,95,68,110,72];
+  heights.forEach((h,i)=>{
+    const up = Math.random() > 0.42;
+    const c = document.createElement('div');
+    c.className = 'candle ' + (up ? 'g' : 'r');
+    const wickH = Math.round(h*0.22);
+    c.innerHTML = `<div class="wick" style="height:${wickH}px"></div><div class="body-bar" style="height:${h}px"></div>`;
+    chart.appendChild(c);
+  });
+</script>
 
 </body>
 </html>
